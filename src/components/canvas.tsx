@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import BoxView from './box-view';
 import ArrowView from './arrow-view';
 import DomainModel from '../stores/domain-model';
+import Sidebar from './sidebar';
 
 @observer
 export default class Canvas extends Component<{ store: DomainModel }> {
@@ -23,6 +24,7 @@ export default class Canvas extends Component<{ store: DomainModel }> {
                         <BoxView box={box} store={store} key={box.id} />
                     )}
                 </div>
+                <Sidebar store={store} />
             </div>
         )
     }
