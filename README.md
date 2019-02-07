@@ -1,3 +1,33 @@
+MobX Boxes Demo
+=====================
+
+This project is a recreation of the original and awesome [MobX demo](https://github.com/mobxjs/mobx-reactive2015-demo) created by Michel Weststrate for [ReactiveConf](https://www.youtube.com/watch?v=FEwLwiizlk0)
+
+The demo illustrates how you can create a simple drag & drop editor using [MobX](https://github.com/mobxjs/mobx) and React.
+
+The slides of Michel Weststrate's talk can be found [here](https://docs.google.com/presentation/d/16hE-cxJ8C5XQVjql17krNAeYNF_9I3n3j13ho-KLWYU/edit#slide=id.p).
+
+Unfortunately, the original demo hasn't been maintained. I brought it up to standard with the latest versions of React, MobX4 and create-react-app. I also switched the code to typescript, which I believe is really important if you want to build on this template for larger projects.
+
+## Usage
+
+To interact with the application:
+* Click to select.
+* Boxes can be dragged around.
+* Use the input box to rename stuff.
+* CTRL + click to add new boxes. If there is an active selection an arrow will be added as well.
+* Use the tiny buttons in the bottom left to generate a bunch of random boxes and arrows, and to travel forward and backward in time.
+
+## Run the example
+
+```
+npm install
+npm start
+open http://localhost:3000
+```
+
+## Development notes
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app),
 using the --typescript option.
 
