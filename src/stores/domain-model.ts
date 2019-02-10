@@ -1,30 +1,12 @@
-import { observable } from "mobx";
+import { observable, transaction } from "mobx";
 import Arrow from "./arrow";
 import Box from "./box";
-import { v4 as uuid } from 'uuid';
+import { serializable, list, reference, object, serialize, update } from "serializr";
 
 export default class DomainModel {
-    @observable boxes: Box[] = [];
-    @observable arrows: Arrow[] = [];
-    @observable selection: Box | null = null;
-
-    constructor() {
-        /*
-            Some initial state
-        */
-        this.boxes.push(
-            new Box('Rotterdam', 100, 100),
-            new Box('Vienna', 650, 300)
-        );
-
-        this.arrows.push({
-            id: uuid(),
-            from: this.boxes[0],
-            to: this.boxes[1]
-        });
-
-
-    }
+    @serializable(list(object(Box))) @observable    boxes: Box[] = [];
+    @serializable(list(object(Arrow))) @observable  arrows: Arrow[] = [];
+    @serializable(reference(Box)) @observable       selection: Box | null = null;
 
     addBox = (name: string, x: number, y: number, fromBox: Box | null) => {
         const newBox = new Box(name, x, y);
@@ -36,4 +18,33 @@ export default class DomainModel {
         return newBox;
     }
 
+}
+
+/*
+ * Serialize the domain model store to json
+ */
+export function serializeState(store: DomainModel) {
+    return serialize(store);
+}
+
+/*
+ * Update the domain model store from the given json
+ */
+export function deserializeState(store: DomainModel, json: string) {
+    update(DomainModel, store, json);
+}
+
+/*
+ * Generate 'amount' new random arrows and boxes
+*/
+export function generateStuff(store: DomainModel, amount: number) {
+    transaction(() => {
+        for (var i = 0; i < amount; i++) {
+            store.boxes.push(new Box('#' + i, Math.random() * window.innerWidth * 0.5, Math.random() * window.innerHeight));
+            store.arrows.push(new Arrow(
+                store.boxes[Math.floor(Math.random() * store.boxes.length)],
+                store.boxes[Math.floor(Math.random() * store.boxes.length)]
+            ));
+        }
+    });
 }

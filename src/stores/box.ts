@@ -1,11 +1,13 @@
 import { computed, observable } from 'mobx';
 import { v4 as uuid } from 'uuid';
+import { serializable, identifier } from 'serializr';
 
 export default class Box {
-    id: string; // for react
-    @observable name: string = 'Box' + this.id;
-    @observable x: number = 0;
-    @observable y: number = 0;
+    @serializable(identifier()) id: string; // for react
+    @serializable @observable   name: string = 'Box' + this.id;
+    @serializable @observable   x: number = 0;
+    @serializable @observable   y: number = 0;
+    
     @computed get width(): number {
         return this.name.length * 15;
     }

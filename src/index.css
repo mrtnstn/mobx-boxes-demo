@@ -91,3 +91,8 @@ input, button {
 input {
   width: 100%;
 }
+
+.funstuff {
+  position: fixed;
+  bottom: 0;
+}

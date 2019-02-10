@@ -1,10 +1,11 @@
 import Box from "./box";
 import { v4 as uuid } from 'uuid';
+import { serializable, identifier, reference } from "serializr";
 
 export default class Arrow {
-    id: string;
-    from: Box;
-    to: Box;
+    @serializable(identifier())     id: string;
+    @serializable(reference(Box))   from: Box;
+    @serializable(reference(Box))   to: Box;
 
     constructor(from: Box, to: Box) {
         this.id = uuid();

@@ -5,6 +5,7 @@ import BoxView from './box-view';
 import ArrowView from './arrow-view';
 import DomainModel from '../stores/domain-model';
 import Sidebar from './sidebar';
+import FunStuff from './fun-stuff';
 
 @observer
 export default class Canvas extends Component<{ store: DomainModel }> {
@@ -25,6 +26,7 @@ export default class Canvas extends Component<{ store: DomainModel }> {
                     )}
                 </div>
                 <Sidebar store={store} />
+                <FunStuff store={store} />
             </div>
         )
     }
